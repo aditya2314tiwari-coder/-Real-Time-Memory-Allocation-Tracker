@@ -1,0 +1,24 @@
+flowchart TD
+    A([Start]) --> B[Launch Tkinter application]
+    B --> C{Choose memory model}
+    C -->|Paging| D[Enter process ID and size]
+    C -->|Segmentation| E[Enter process ID and size]
+    D --> F[Calculate required pages]
+    F --> G{Enough free frames?}
+    G -->|Yes| H[Assign free frames and update page table]
+    G -->|No| I[Show allocation failure]
+    E --> J[Find first contiguous free hole]
+    J --> K{Hole large enough?}
+    K -->|Yes| L[Allocate segment and update memory map]
+    K -->|No| M[Show allocation failure]
+    H --> N[Refresh dashboard and event log]
+    I --> N
+    L --> N
+    M --> N
+    N --> O{Deallocate, auto-demo, reset, or continue?}
+    O -->|Deallocate| P[Release frames or segment]
+    P --> N
+    O -->|Continue| C
+    O -->|Reset| Q[Clear simulation state]
+    Q --> N
+    O -->|Exit| R([End])
